@@ -1,7 +1,8 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-
+Bootstrap(app)
 
 @app.route('/')
 def home():
@@ -10,6 +11,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
-
-
 
