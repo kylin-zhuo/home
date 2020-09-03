@@ -24,7 +24,10 @@ def blog():
 def contact():
     return render_template('contact.html')
 
+@app.route('/gallery.html')
+def gellery():
+    return render_template('gallery.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
-
