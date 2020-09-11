@@ -28,6 +28,10 @@ def contact():
 def gellery():
     return render_template('gallery.html')
 
+@app.route('/demidovich.html')
+def demodovich():
+	return render_template('demidovich.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

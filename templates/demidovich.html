@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<p style="text-align: center; font-family: sans-serif;">Tracking the progress of Demidovich exercises.</p>
+
+	<div id="table1"></div>
+
+	<script type="text/javascript">
+
+		var dict = {
+			1: 'a',
+			10: 'b'
+		};
+
+		function createQuestionsGrid(start, rows, cols, callback) {
+		    var i = start;
+		    var grid = document.createElement('table');
+		    grid.className = 'grid';
+		    for (var r = 0; r < rows; ++r) {
+		        var tr = grid.appendChild(document.createElement('tr'));
+		        for (var c = 0; c < cols; ++c){
+		            var cell = tr.appendChild(document.createElement('td'));
+
+		            cell.innerHTML = ++i;
+
+		            if (typeof dict[i] !== 'undefined') {
+		            	cell.className = 'solved';
+		            }
+
+		            cell.addEventListener('click', (function(el, r, c, i) {
+		                return function(){
+		                    callback(el, r, c, i);
+		                }
+		            })(cell, r, c, i), false);
+		        }
+		    }
+		    return grid;
+		}
+
+		function clickEvent(el, row, col, i) {
+		    console.log((el.className == 'solved' ? "Unsolved" : "Solved") + " Question #:"  + i);
+		    el.className = el.className == 'solved' ? '' : 'solved';
+		}
+
+		
+		var lastClicked;
+		var numRows = 25;
+		var numCols = 40;
+
+		var grid1 = createQuestionsGrid(0, numRows, numCols, clickEvent);
+		var grid2 = createQuestionsGrid(1000, numRows, numCols, clickEvent);
+		var grid3 = createQuestionsGrid(2000, numRows, numCols, clickEvent);
+
+		document.body.appendChild(grid1);
+		document.body.appendChild(grid2);
+		document.body.appendChild(grid3);
+		     
+
+	</script>
+
+	<style type="text/css">
+		
+		.grid { margin:1em auto; border-collapse:collapse }
+		.grid td {
+		    cursor: pointer;
+		    width:31px; 
+		    height:25px;
+		    border:1px solid #cec;
+		    text-align:center;
+		    font-family:sans-serif; 
+		    font-size: 11px;
+		    background-color: #ffefff; 
+		}
+		.grid td.solved {
+		    background-color: green;
+		    font-weight:bold; 
+		    color:green;
+		}
+
+	</style>
+
+</body>
+
+</html>
