@@ -30,11 +30,42 @@ def gellery():
 
 @app.route('/demidovich.html')
 def demodovich():
-	file = open("data/demidovich.txt")
-	d = file.readlines()
-	solved = list(set(map(lambda x:int(x), d[0].split(',')))) if len(d) > 0 else []
+	solve = []
+	with open("data/demidovich.txt") as file:
+		solved = parse_demi_progress(file)
 	return render_template('demidovich.html', solved=solved)
 
+@app.route('/update-demi/<string:action>/<int:question_id>')
+def update(action, question_id):
+
+	qs = []
+	
+	with open("data/demidovich.txt", "r") as file:
+
+		qs = parse_demi_progress(file)
+
+		if action == 'add':
+			print("add " + str(question_id))
+
+			if question_id not in qs:
+				qs.append(question_id)
+
+		elif action == 'remove':
+			print("remove" + str(question_id))
+			if question_id in qs:
+				qs.remove(question_id)
+
+	with open("data/demidovich.txt", "w") as file:
+		file.write(str(qs))
+
+	return "success - " + action + ": " + str(question_id)
+ 
+
+def parse_demi_progress(f):
+	d = str(f.readline())
+	print(d)
+	d = d.strip('[').strip(']').strip()
+	return [] if not d else list(set(map(lambda x:int(x), d.split(','))))
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

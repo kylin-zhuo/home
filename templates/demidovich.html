@@ -9,7 +9,7 @@
 
 	<div id="table1"></div>
 
-	<p style="text-align: center; font-family: sans-serif;">Solved: {{solved|length}}/3000+</p>
+	<p id="progress" style="text-align: center; font-family: sans-serif;">SOLVED: {{solved|length}} / 3000+</p>
 
 	<script type="text/javascript">
 
@@ -68,20 +68,30 @@
 
 		function clickEvent(el, row, col, i) {
 
-			if (el.className == 'solved') {
+			var progressText = document.getElementById("progress").innerHTML;
+			var reg = /(?:^|\s)SOLVED: ([0-9]*) \//g;
+			var matched = reg.exec(progressText);
+			var current = typeof matched[1] === 'undefined' ? record : parseInt(matched[1]);
 
+			if (el.className == 'solved') {
 				console.log("Unsolved question #: " + i);
 				el.className = '';
+				fetch('/update-demi/remove/' + i).then();
 
+				progressText = progressText.replace(matched[1], current-1);
 			}
 
 			else {
 				console.log("Solved question #: " + i);
 				el.className = 'solved';
+				fetch('/update-demi/add/' + i).then();
+
+				progressText = progressText.replace(matched[1], current+1);
 			}
 
-		}
+			document.getElementById("progress").innerHTML = progressText;
 
+		}
 		
 		var lastClicked;
 		var numRows = 25;
@@ -112,8 +122,10 @@
 		}
 		.grid td.solved {
 		    background-color: green;
+		    opacity: 0.8;
 		    font-weight:bold; 
 		    color:green;
+
 		}
 
 	</style>
