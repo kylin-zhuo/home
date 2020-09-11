@@ -30,7 +30,10 @@ def gellery():
 
 @app.route('/demidovich.html')
 def demodovich():
-	return render_template('demidovich.html')
+	file = open("data/demidovich.txt")
+	d = file.readlines()
+	solved = list(set(map(lambda x:int(x), d[0].split(',')))) if len(d) > 0 else []
+	return render_template('demidovich.html', solved=solved)
 
 
 if __name__ == "__main__":

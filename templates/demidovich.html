@@ -5,16 +5,41 @@
 </head>
 <body>
 
-	<p style="text-align: center; font-family: sans-serif;">Tracking the progress of Demidovich exercises.</p>
+	<p style="text-align: center; font-family: sans-serif; font-weight: bold">Tracking the progress of Demidovich exercises.</p>
 
 	<div id="table1"></div>
 
+	<p style="text-align: center; font-family: sans-serif;">Solved: {{solved|length}}/3000+</p>
+
 	<script type="text/javascript">
 
-		var dict = {
-			1: 'a',
-			10: 'b'
-		};
+		var record = {{solved}};
+
+		// var fs = require('fs');
+		// var data = fs.readFileSync("data/demidovich.json", "utf8");
+		// var record = JSON.parse(data);
+		// console.log(record);
+
+		// var fs = require("fs");
+		// console.log("Going to write into existing file");
+		// // Open a new file with name input.txt and write Simply Easy Learning! to it.
+		// fs.writeFile('input.txt', 'Simply Easy Learning!', function(err) {
+		//    if (err) {
+		//       return console.error(err);
+		//    }
+		//    console.log("Data written successfully!");
+		//    console.log("Let's read newly written data");
+		//    // Read the newly written file and print all of its content on the console
+		//    fs.readFile('input.txt', function (err, data) {
+		//       if (err) {
+		//          return console.error(err);
+		//       }
+		//       console.log("Asynchronous read: " + data.toString());
+		//    });
+		// });
+
+
+		// var record = JSON.parse(demidovich);
 
 		function createQuestionsGrid(start, rows, cols, callback) {
 		    var i = start;
@@ -27,7 +52,7 @@
 
 		            cell.innerHTML = ++i;
 
-		            if (typeof dict[i] !== 'undefined') {
+		            if (record.indexOf(i) > -1) {
 		            	cell.className = 'solved';
 		            }
 
@@ -42,8 +67,19 @@
 		}
 
 		function clickEvent(el, row, col, i) {
-		    console.log((el.className == 'solved' ? "Unsolved" : "Solved") + " Question #:"  + i);
-		    el.className = el.className == 'solved' ? '' : 'solved';
+
+			if (el.className == 'solved') {
+
+				console.log("Unsolved question #: " + i);
+				el.className = '';
+
+			}
+
+			else {
+				console.log("Solved question #: " + i);
+				el.className = 'solved';
+			}
+
 		}
 
 		
@@ -58,7 +94,6 @@
 		document.body.appendChild(grid1);
 		document.body.appendChild(grid2);
 		document.body.appendChild(grid3);
-		     
 
 	</script>
 
