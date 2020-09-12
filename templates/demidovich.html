@@ -50,7 +50,9 @@
 		        for (var c = 0; c < cols; ++c){
 		            var cell = tr.appendChild(document.createElement('td'));
 
-		            cell.innerHTML = ++i;
+		            var content = cell.appendChild(document.createElement("a"));
+
+		            content.innerHTML = ++i;
 
 		            if (record.indexOf(i) > -1) {
 		            	cell.className = 'solved';
@@ -109,7 +111,11 @@
 
 	<style type="text/css">
 		
-		.grid { margin:1em auto; border-collapse:collapse }
+		.grid { 
+			margin:1em auto; 
+			border-collapse:collapse 
+		}
+
 		.grid td {
 		    cursor: pointer;
 		    width:31px; 
@@ -120,12 +126,21 @@
 		    font-size: 11px;
 		    background-color: #ffefff; 
 		}
+		
 		.grid td.solved {
 		    background-color: green;
 		    opacity: 0.8;
 		    font-weight:bold; 
-		    color:green;
+		    /*color:green;*/
 
+		}
+
+		.grid td.solved a {
+			opacity: 0.1;
+		}
+
+		.grid td.solved a:hover {
+			opacity: 0.9;
 		}
 
 	</style>
