@@ -2,9 +2,25 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 import json
 import datetime
+import sqlite3
+from flask import g
+
+DATABASE = 'db/kylin-home.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
 
 app = Flask(__name__)
 Bootstrap(app)
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 
 @app.route('/')
@@ -24,6 +40,11 @@ def about():
 
 @app.route('/blog.html')
 def blog():
+    cur = get_db().execute("select * from post")
+    rv = cur.fetchall()
+    cur.close()
+    d = rv[0]
+    print(d)
     return render_template('blog.html')
 
 
