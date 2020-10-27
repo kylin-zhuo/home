@@ -53,42 +53,31 @@
 
 	<!-- Content -->
 	<div class="content">
-
 		<div class="container">
-
-			{%for i in range(0, len)%} 
-			    <!-- <p>{{post_list[i]}}</p>  -->
-
+			{%for i in range(0, len) if post_list[i][3]|length > 20 %} 
 				<div class="wanderlust-post">
-
 					<div class="title"><a>{{post_list[i][1]}}</a></div>
 					<hr>
-
 					<div class="wanderlust-post-headline">
 						<strong class="article-date">{{post_list[i][2]}}</strong>
 						<strong class="tags">TAGS: {{post_list[i][4]}}</strong>
 					</div>
-					
 					<div class="in-content">
 						<article class="text">
-
-							{%for p in post_list[i][3].replace('<br>', '\n').replace('<br/>', '\n').split('\n')%}
-							<p>
-								{{p}}
-							</p>
+							{%for p in post_list[i][3].replace('<br>', '\n').replace('<br/>', '\n').split('\n') %}
+								<p>{{p}}</p>
 							{%endfor%}
-
 						</article>
-						<div class="image">
-							<img src="{{post_list[i][5]}}"/>
+						<div class="image-placeholder">
+							{%for image_url in post_list[i][5].split(',')%}
+								<div class="individual-image">
+									<img src="{{image_url}}"/>
+								</div>
+							{%endfor%}
 						</div>
-						
 					</div>
-					
 				</div>
 			{%endfor%} 
-
-
 		</div>
 	</div>
 
@@ -135,7 +124,7 @@
 			left: 0;
 		}
 
-		.content .container .wanderlust-post .in-content .image {
+		.content .container .wanderlust-post .in-content .image-placeholder {
 			width: 30%;
 			/*display: block;*/
 			/*position: absolute;*/
@@ -144,6 +133,11 @@
 			float: left;
 			padding-left: 3%;
 			right: 0;
+		}
+
+		.content .container .wanderlust-post .in-content .individual-image {
+			width: 100%;
+			margin-bottom: 18px;
 		}
 
 		.wanderlust-post-headline {
