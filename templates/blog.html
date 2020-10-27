@@ -19,7 +19,7 @@
 		<div class="container">
 			<header class="group top-nav">
 				<nav class="navbar logo-w navbar-left" >
-					<a class="logo" href="blog.html">Kylin's WanderLust</a>
+					<a class="logo" href="blog.html">KYLIN'S WANDERLUST</a>
 				</nav>
 				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
 				    <span class="logo">Kylin</span>
@@ -50,67 +50,129 @@
 		</div>
 	</div>
 
+
 	<!-- Content -->
 	<div class="content">
 
 		<div class="container">
 
-			<div class="post">
+			{%for i in range(0, len)%} 
+			    <!-- <p>{{post_list[i]}}</p>  -->
 
-				<a href="#"><h1>Take a break among the Utah rocks</h1></a>
-				<hr>
-				<div class="article-date">
-					<strong>April-15-2019</strong>
-				</div>
-				<div class="in-content">
-					<p>
-						Lots of beautiful rocks, minerals and astonishing landcape of sedimentary rocks come from the state of Utah, which makes it a heaven for a rock-lover like me. There are 5 National Parks and 6 National Forests in Utah. The western part of the state yields obsidian, topaz, trilobites, agates, jaspers, and mineral specimens. The lower half of the east side of the state is particularly rich in rocks and minerals.
-					</p>
-					<a class="read-more" href="#">Read more</a>
-				</div>
-				<div class="foot-post">
-					<div class="units-row">
-					    <div class="unit-100">
-					    	<strong>Tags:</strong>
-					    	<a href="#">Utah</a>,
-					    	<a href="#">Rocks</a>,
-					    	<a href="#">Landscape</a>
-					    </div>
+				<div class="wanderlust-post">
 
+					<div class="title"><a>{{post_list[i][1]}}</a></div>
+					<hr>
+
+					<div class="wanderlust-post-headline">
+						<strong class="article-date">{{post_list[i][2]}}</strong>
+						<strong class="tags">TAGS: {{post_list[i][4]}}</strong>
 					</div>
-				</div>
-			</div>
+					
+					<div class="in-content">
+						<article class="text">
 
+							{%for p in post_list[i][3].replace('<br>', '\n').replace('<br/>', '\n').split('\n')%}
+							<p>
+								{{p}}
+							</p>
+							{%endfor%}
 
-			<div class="post">
-				<!-- Heading -->
-				<a href="#"><h1>The fall colors in New England</h1></a>
-				<hr>
-				<div class="article-date">
-					<strong>Oct-23-2019</strong>
-				</div>
-				<div class="in-content">
-					<img class="right" src="static/img/new-england.jpg" alt="" style="width: 300px; margin-left: 10px">
-					<p>
-						When time comes to the fall, or autumn, New England gets attractively famous for its glorious foliage as billions of leaves change from green to a kaleidoscope of colors. The air is crisp and cool, which makes it perfect for hiking, biking or just taking a classic fly-drive break along back roads, where farm stands are piled high with crunchy apples and orange pumpkins.
-					</p>
-				</div>
-				<div class="foot-post">
-					<div class="units-row">
-					    <div class="unit-100">
-					    	<strong>Tags:</strong>
-					    	<a href="#">Leaves</a>,
-					    	<a href="#">Fall</a>,
-					    	<a href="#">New England</a>
-					    </div>
+						</article>
+						<div class="image">
+							<img src="{{post_list[i][5]}}"/>
+						</div>
+						
 					</div>
+					
 				</div>
-			</div>
-			<!-- /post -->
+			{%endfor%} 
+
 
 		</div>
 	</div>
 
+	<style type="text/css">
+
+		.content .container .wanderlust-post {
+			width: 100%;
+			margin-bottom: 25px;
+			margin-top: 25px;
+			display: inline-block;
+		}
+		
+		.content .container .wanderlust-post .title a {
+			font-size: 22px;
+			font-weight: 300;
+			text-decoration-line: none;
+			font-family: Arial Black;
+			color: #6c4d91;
+		}
+
+		.content .container .wanderlust-post .title:hover {
+			font-size: 22px;
+			font-weight: 35;
+			text-decoration-line: underline;
+			color: purple;
+			cursor: pointer;
+		}
+
+		.content .container .wanderlust-post .in-content {
+			width: 100%;
+			/*display: block;*/
+			/*position: absolute;*/
+			/*margin: auto;*/
+			/*left: 0;*/
+		}
+
+		.content .container .wanderlust-post .in-content .text {
+			width: 66%;
+			/*display: block;*/
+			/*position: absolute;*/
+			/*margin: auto;*/
+			/*left: 0;*/
+			float: left;
+			left: 0;
+		}
+
+		.content .container .wanderlust-post .in-content .image {
+			width: 30%;
+			/*display: block;*/
+			/*position: absolute;*/
+			/*margin: auto;*/
+			/*right: 0;*/
+			float: left;
+			padding-left: 3%;
+			right: 0;
+		}
+
+		.wanderlust-post-headline {
+			opacity: 62%;
+		}
+
+		.wanderlust-post-headline .article-date {
+			font-family: Futura;
+		}
+
+		.wanderlust-post-headline .tags {
+			font-family: Futura;
+			float: right; padding-right: 5%
+		}
+
+		.wanderlust-post .in-content article {
+			/*font-family: Calibri;*/
+			font-family: Candara;
+			font-size: 18px;
+		}
+
+
+	</style>
+
+
+	<script type="text/Javascript">
+
+	</script>
+<!-- 
 	<footer>
 		<div class="container">
 			<div class="units-row">
@@ -119,7 +181,7 @@
 			    </div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 
 	<!-- Javascript -->
 	<script src="js/jquery.min.js"></script>

@@ -40,12 +40,12 @@ def about():
 
 @app.route('/blog.html')
 def blog():
-    cur = get_db().execute("select * from post")
-    rv = cur.fetchall()
+	# fetch the descriptions of all the posts
+    cur = get_db().execute("select * from post order by date")
+    post_list = cur.fetchall()
     cur.close()
-    d = rv[0]
-    print(d)
-    return render_template('blog.html')
+    # print(post_list)
+    return render_template('blog.html', post_list=post_list, len=len(post_list))
 
 
 @app.route('/contact.html')
@@ -110,15 +110,15 @@ def update(action, question_id):
 	return "success - " + action + ": " + str(question_id)
 
 
-@app.route('/test')
-def test1():
-	data = {}
-	with open("data/demidovich/log.json", "r") as file:
-		data = json.loads(file.read())
-	data['2020-09-12'] = "4,5"
-	with open("data/demidovich-log.json", "w") as file:
-		file.write(json.dumps(data))
-	return str(data)
+# @app.route('/test')
+# def test1():
+# 	data = {}
+# 	with open("data/demidovich/log.json", "r") as file:
+# 		data = json.loads(file.read())
+# 	data['2020-09-12'] = "4,5"
+# 	with open("data/demidovich-log.json", "w") as file:
+# 		file.write(json.dumps(data))
+# 	return str(data)
 
  
 def parse_demi_progress(f):

@@ -1,13 +1,10 @@
-/*!
- *  Saturn HTML Template by @flamekaizar
- *  License (MIT License)
- */
 
 body { margin-bottom: 50px }
+
 a { font-family: "Open Sans", sans-serif }
 .container {
     margin: auto;
-    max-width: 724px;
+    max-width: 61.8%;
     padding: 0 20px;
 }
 /* Navigation */
@@ -30,14 +27,18 @@ a { font-family: "Open Sans", sans-serif }
      -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out; 
 }
-/* Created by @flamekaizar */
-.top-nav a.logo,
+.top-nav a.logo {
+    color: #6c4d91;
+    font-weight: 1000;
+    opacity: 95%;
+    font-family: Arial black;
+}
 .logo {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     font-size: 27px;
     color: #000;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
 }
 .navigation-toggle .logo {
     font-size: 20px;
@@ -111,7 +112,7 @@ img.img-intro {
 	-moz-animation: smooth-entry-btn 1s;
 	animation: smooth-entry-btn 1s;
 }
-.content { padding-top: 75px }
+.content { padding-top: 50px }
 
 .post { 
     margin-bottom: 50px 
@@ -158,32 +159,6 @@ img.img-intro {
 
 .in-content { 
     margin-top: 30px;
-}
-
-
-a.read-more {
-    padding: 5px 10px;
-    background-color: #FFF;
-    border: 1px solid #E85F37;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    color: #E85F37;
-    font-size: 13px; /* Created by @flamekaizar */
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 2px;
-}
-
-a.read-more:hover {
-	background-color: #FF6C40;
-	color: #fff;
-	-webkit-transition: all .25s ease-in-out;
-	   -moz-transition: all .25s ease-in-out;
-	    -ms-transition: all .25s ease-in-out;
-	     -o-transition: all .25s ease-in-out;
-	        transition: all .25s ease-in-out;
 }
 
 .article-date {
