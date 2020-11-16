@@ -25,12 +25,12 @@ def close_connection(exception):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
-@app.route('/index.html')
+@app.route('/home.html')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
 @app.route('/about.html')
@@ -70,7 +70,7 @@ def demodovich():
 def update(action, question_id):
 
 	qs = []
-	
+
 	with open("data/demidovich/solved.txt", "r") as file:
 
 		qs = parse_demi_progress(file)
@@ -120,7 +120,7 @@ def update(action, question_id):
 # 		file.write(json.dumps(data))
 # 	return str(data)
 
- 
+
 def parse_demi_progress(f):
 	return json.loads(f.read())
 

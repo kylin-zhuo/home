@@ -27,10 +27,10 @@
 		<div id="gridContainer">
 		</div>
 	</div>
-		
+
 	</div>
 
-	<div style="text-align: center; font-family: sans-serif;"><a href="index.html">Back to Home</a></div>
+	<div style="text-align: center; font-family: sans-serif;"><a href="home.html">Back to Home</a></div>
 
 
 	<script type="text/javascript">
@@ -118,7 +118,7 @@
 			document.getElementById("progress").innerHTML = progressText;
 
 		}
-		
+
 		var lastClicked;
 		var numRows = 25;
 		var numCols = 40;
@@ -154,7 +154,7 @@
 			// Show the current tab, and add an "active" class to the button that opened the tab
 			document.getElementById("grid" + whichOne).style.display = "";
 			evt.currentTarget.className += " active";
-		} 
+		}
 
 		// openSlide(1);
 
@@ -205,19 +205,19 @@
 			border: 1px solid #ccc;
 			border-top: none;
 		}
-		
-		.grid { 
-			margin:1em auto; 
-			border-collapse:collapse 
+
+		.grid {
+			margin:1em auto;
+			border-collapse:collapse
 		}
 
 		.grid td {
 		    cursor: pointer;
-		    width:31px; 
+		    width:31px;
 		    height:25px;
 		    border:1px solid #cec;
 		    text-align:center;
-		    font-family:sans-serif; 
+		    font-family:sans-serif;
 		    font-size: 11px;
 		    background-color: #cce7e8;
 		}
@@ -225,7 +225,7 @@
 		.grid td.solved {
 		    background-color: green;
 		    opacity: 0.8;
-		    font-weight:bold; 
+		    font-weight:bold;
 		    /*border: 1px solid #cfc;*/
 		    /*color:green;*/
 
