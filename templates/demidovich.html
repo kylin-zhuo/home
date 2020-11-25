@@ -5,63 +5,77 @@
 </head>
 <body>
 
-	<p style="text-align: center; font-family: sans-serif; font-weight: bold">Progress of Demidovich Quizzes.</p>
+	<div class="title">
+		<p>Progress of Demidovich Quizzes.</p>
+	</div>
 
-	<div id="table1"></div>
-
-	<p id="progress" style="text-align: center; font-family: sans-serif;">SOLVED: {{solved|length}} / 3000+</p>
-
-	<div id="pbar" class="pbar-light-grey pbar-round-xlarge">
-      <div class="pbar-blue pbar-round-xlarge" style="width:{{solved|length/30.0}}%">
-      	<a>{{'%0.2f'|format(solved|length/30.0)}}%</a>
-      </div>
-    </div>
-
+	<div class="progress-solved">
+		<p id="progress">SOLVED: {{solved|length}} / 3000+</p>
+	</div>
+	<div class="progress-bar pbar-light-grey pbar-round-xlarge">
+		<div class="pbar-blue pbar-round-xlarge" style="width:{{solved|length/30.0}}%">
+			<a>{{'%0.2f'|format(solved|length/30.0)}}%</a>
+		</div>
+	</div>
 
 	<div class="tab">
 	  <button class="tablinks" id="tab1" onclick="openSlide(event, 1)">1-1000</button>
 	  <button class="tablinks" id="tab2" onclick="openSlide(event, 2)">1001-2000</button>
 	  <button class="tablinks" id="tab3" onclick="openSlide(event, 3)">2001-3000</button>
-
-	<div>
-		<div id="gridContainer">
-		</div>
+		<div><div id="gridContainer"></div></div>
 	</div>
 
+	<div style="text-align: center; font-family: sans-serif;">
+		<input id="show-answer" type="checkbox" name="show-answer" value="show-answer" checked=true><a>Show Answer?</a>&nbsp;&nbsp;&nbsp;
+		<a href="home.html">Back to Home</a>
 	</div>
 
-	<div style="text-align: center; font-family: sans-serif;"><a href="home.html">Back to Home</a></div>
-
+	<!-- modal to show answers-->
+	<div id="answerModal" class="modal">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <p>Question <a id="questionIdInAnswer">1</a></p>
+			<div class="answerImageWrapper">
+				<img id="answerImage" src="" alt="">
+			</div>
+	  </div>
+	</div>
 
 	<script type="text/javascript">
 
-		var record = {{solved}};
+		var record = {{solved}},
+		    lastClicked,
+				numRows = 25,
+				numCols = 40,
+				grid1 = createQuestionsGrid(0, numRows, numCols, "grid1", clickQuestionGridEvent),
+				grid2 = createQuestionsGrid(1000, numRows, numCols, "grid2", clickQuestionGridEvent),
+				grid3 = createQuestionsGrid(2000, numRows, numCols, "grid3", clickQuestionGridEvent);
 
-		// var fs = require('fs');
-		// var data = fs.readFileSync("data/demidovich.json", "utf8");
-		// var record = JSON.parse(data);
-		// console.log(record);
+		var Tester = {
+			testCheckbox: function() {
+				console.log(document.getElementById("show-answer").checked);
+			}
+		};
 
-		// var fs = require("fs");
-		// console.log("Going to write into existing file");
-		// // Open a new file with name input.txt and write Simply Easy Learning! to it.
-		// fs.writeFile('input.txt', 'Simply Easy Learning!', function(err) {
-		//    if (err) {
-		//       return console.error(err);
-		//    }
-		//    console.log("Data written successfully!");
-		//    console.log("Let's read newly written data");
-		//    // Read the newly written file and print all of its content on the console
-		//    fs.readFile('input.txt', function (err, data) {
-		//       if (err) {
-		//          return console.error(err);
-		//       }
-		//       console.log("Asynchronous read: " + data.toString());
-		//    });
-		// });
+		var modal = document.getElementById("answerModal");
+		// Get the <span> element that closes the modal
+		var closeAnswerButton = document.getElementsByClassName("close")[0];
+		closeAnswerButton.onclick = function() {
+		  modal.style.display = "none";
+		}
 
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
 
-		// var record = JSON.parse(demidovich);
+		document.getElementById("gridContainer").appendChild(grid1);
+		document.getElementById("gridContainer").appendChild(grid2);
+		document.getElementById("gridContainer").appendChild(grid3);
+
+		grid2.style.display = "none";
+		grid3.style.display = "none";
 
 		function createQuestionsGrid(start, rows, cols, id, callback) {
 		    var i = start;
@@ -73,15 +87,11 @@
 		        var tr = grid.appendChild(document.createElement('tr'));
 		        for (var c = 0; c < cols; ++c){
 		            var cell = tr.appendChild(document.createElement('td'));
-
 		            var content = cell.appendChild(document.createElement("a"));
-
 		            content.innerHTML = ++i;
-
 		            if (record.indexOf(i) > -1) {
 		            	cell.className = 'solved';
 		            }
-
 		            cell.addEventListener('click', (function(el, r, c, i) {
 		                return function(){
 		                    callback(el, r, c, i);
@@ -92,48 +102,40 @@
 		    return grid;
 		}
 
-		function clickEvent(el, row, col, i) {
+		function clickQuestionGridEvent(el, row, col, i) {
+			// when the show-answer check box is checked, show answer
+			if (document.querySelector('#show-answer').checked) {
+				if (el.className == 'solved') {
+					console.log("Question #", i, "shows answer modal");
+					modal.style.display = "block";
+					document.querySelector("#answerImage").src = "static/img/demidovich/answers/" + i + ".jpg";
+					document.querySelector("#questionIdInAnswer").innerHTML = i;
+				}
+				else {
+					console.log("Question #", i, "does not have answer yet.");
+				}
+			} else {
+				// otherwise flip the status of done or undone
+				var progressText = document.getElementById("progress").innerHTML;
+				var reg = /(?:^|\s)SOLVED: ([0-9]*) \//g;
+				var matched = reg.exec(progressText);
+				var current = typeof matched[1] === 'undefined' ? record : parseInt(matched[1]);
 
-			var progressText = document.getElementById("progress").innerHTML;
-			var reg = /(?:^|\s)SOLVED: ([0-9]*) \//g;
-			var matched = reg.exec(progressText);
-			var current = typeof matched[1] === 'undefined' ? record : parseInt(matched[1]);
-
-			if (el.className == 'solved') {
-				console.log("Unsolved question #: " + i);
-				el.className = '';
-				fetch('/update-demi/remove/' + i).then();
-
-				progressText = progressText.replace(matched[1], current-1);
+				if (el.className == 'solved') {
+					console.log("Unsolved question #: " + i);
+					el.className = '';
+					fetch('/update-demi/remove/' + i).then();
+					progressText = progressText.replace(matched[1], current-1);
+				}
+				else {
+					console.log("Solved question #: " + i);
+					el.className = 'solved';
+					fetch('/update-demi/add/' + i).then();
+					progressText = progressText.replace(matched[1], current+1);
+				}
+				document.getElementById("progress").innerHTML = progressText;
 			}
-
-			else {
-				console.log("Solved question #: " + i);
-				el.className = 'solved';
-				fetch('/update-demi/add/' + i).then();
-
-				progressText = progressText.replace(matched[1], current+1);
-			}
-
-			document.getElementById("progress").innerHTML = progressText;
-
 		}
-
-		var lastClicked;
-		var numRows = 25;
-		var numCols = 40;
-
-		var grid1 = createQuestionsGrid(0, numRows, numCols, "grid1", clickEvent);
-		var grid2 = createQuestionsGrid(1000, numRows, numCols, "grid2", clickEvent);
-		var grid3 = createQuestionsGrid(2000, numRows, numCols, "grid3", clickEvent);
-
-		document.getElementById("gridContainer").appendChild(grid1);
-		document.getElementById("gridContainer").appendChild(grid2);
-		document.getElementById("gridContainer").appendChild(grid3);
-
-		grid2.style.display = "none";
-		grid3.style.display = "none";
-
 
 		function openSlide(evt, whichOne) {
 			// Declare all variables
@@ -157,26 +159,33 @@
 		}
 
 		// openSlide(1);
-
-
 		// document.getElementById("tab1").addEventListener("click", openSlide(event, 1));
 		// document.getElementById("tab1").addEventListener("click", openSlide(event, 2));
-		// 		document.getElementById("tab1").addEventListener("click", openSlide(event, 3));
-
-
+		// document.getElementById("tab1").addEventListener("click", openSlide(event, 3));
 
 	</script>
 
-
 	<style type="text/css">
 
+		body {
+			background-color: #ffe;
+		}
+
+		.title {
+		  position: relative;
+		}
+
+		.title p {
+			text-align: center;
+			font-family: sans-serif;
+			font-weight: bold;
+		}
+
 		.tab {
-			position: position;
-			margin: auto;
+			position: relative;
+			margin-top: 5px;
 			text-align: center;
 			padding-top: 13px;
-			top: 0;
-			right: 0;
 		}
 
 		/* Style the buttons that are used to open the tab content */
@@ -253,27 +262,88 @@
 			background-color: #2196F3;
 		}
 
-		#pbar {
-			width: 18%;
-			position: relative;
-			left: 0;
-			right: 0;
-			margin: auto;
+		.demi-status {
+			width: 50%;
+			heigth: 20px;
+			/* display: flex; */
+			text-align: center;
 		}
 
-		#pbar a {
+		.progress-solved {
+			/* width: 30%; */
+			text-align: center;
+			font-family: sans-serif;
+		}
+
+		.progress-bar {
+			width: 30%;
+			text-align: center;
+			position: relative;
+			margin: auto;
+			/* float: right; */
+		}
+
+		.progress-bar a {
 			font-family: sans-serif;
 			font-size: 12px;
 			color: black;
 			font-weight: 40;
 			line-height: 18px;
-			/*position: absolute;*/s
 			left: 20px;
 			text-align: center;
 		}
 
-		body {
-			background-color: #ffe;
+		.modal {
+			display: none;
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 100px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+		  background-color: #fefefe;
+		  margin: auto;
+		  padding: 20px;
+		  border: 1px solid #888;
+		  width: 80%;
+			font-family: sans-serif;
+		}
+
+		/* The Close Button */
+		.close {
+		  color: #aaaaaa;
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+		  color: #000;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+
+		.answerImageWrapper {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+		}
+
+		#answerImage {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
 		}
 
 	</style>
