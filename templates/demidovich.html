@@ -26,8 +26,19 @@
 	</div>
 
 	<div style="text-align: center; font-family: sans-serif;">
-		<input id="show-answer" type="checkbox" name="show-answer" value="show-answer"><a>Show Answer?</a>&nbsp;&nbsp;&nbsp;
+		<input id="show-answer" type="checkbox" name="show-answer" value="show-answer" checked=true><a>Show Answer?</a>&nbsp;&nbsp;&nbsp;
 		<a href="home.html">Back to Home</a>
+	</div>
+
+	<!-- modal to show answers-->
+	<div id="answerModal" class="modal">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <p>Question <a id="questionIdInAnswer">1</a></p>
+			<div class="answerImageWrapper">
+				<img id="answerImage" src="" alt="">
+			</div>
+	  </div>
 	</div>
 
 	<script type="text/javascript">
@@ -36,15 +47,28 @@
 		    lastClicked,
 				numRows = 25,
 				numCols = 40,
-				grid1 = createQuestionsGrid(0, numRows, numCols, "grid1", clickQuestionEvent),
-				grid2 = createQuestionsGrid(1000, numRows, numCols, "grid2", clickQuestionEvent),
-				grid3 = createQuestionsGrid(2000, numRows, numCols, "grid3", clickQuestionEvent);
+				grid1 = createQuestionsGrid(0, numRows, numCols, "grid1", clickQuestionGridEvent),
+				grid2 = createQuestionsGrid(1000, numRows, numCols, "grid2", clickQuestionGridEvent),
+				grid3 = createQuestionsGrid(2000, numRows, numCols, "grid3", clickQuestionGridEvent);
 
 		var Tester = {
 			testCheckbox: function() {
 				console.log(document.getElementById("show-answer").checked);
 			}
 		};
+
+		var modal = document.getElementById("answerModal");
+		// Get the <span> element that closes the modal
+		var closeAnswerButton = document.getElementsByClassName("close")[0];
+		closeAnswerButton.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
 
 		document.getElementById("gridContainer").appendChild(grid1);
 		document.getElementById("gridContainer").appendChild(grid2);
@@ -78,11 +102,14 @@
 		    return grid;
 		}
 
-		function clickQuestionEvent(el, row, col, i) {
+		function clickQuestionGridEvent(el, row, col, i) {
 			// when the show-answer check box is checked, show answer
 			if (document.querySelector('#show-answer').checked) {
 				if (el.className == 'solved') {
-					console.log("Question #", i, "shows answer");
+					console.log("Question #", i, "shows answer modal");
+					modal.style.display = "block";
+					document.querySelector("#answerImage").src = "static/img/demidovich/answers/" + i + ".jpg";
+					document.querySelector("#questionIdInAnswer").innerHTML = i;
 				}
 				else {
 					console.log("Question #", i, "does not have answer yet.");
@@ -139,6 +166,10 @@
 	</script>
 
 	<style type="text/css">
+
+		body {
+			background-color: #ffe;
+		}
 
 		.title {
 		  position: relative;
@@ -262,8 +293,57 @@
 			text-align: center;
 		}
 
-		body {
-			background-color: #ffe;
+		.modal {
+			display: none;
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 100px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+		  background-color: #fefefe;
+		  margin: auto;
+		  padding: 20px;
+		  border: 1px solid #888;
+		  width: 80%;
+			font-family: sans-serif;
+		}
+
+		/* The Close Button */
+		.close {
+		  color: #aaaaaa;
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+		  color: #000;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+
+		.answerImageWrapper {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+		}
+
+		#answerImage {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
 		}
 
 	</style>
