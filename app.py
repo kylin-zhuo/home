@@ -120,6 +120,13 @@ def update(action, question_id):
 # 		file.write(json.dumps(data))
 # 	return str(data)
 
+@app.route('/leetcode.html')
+def leetcode():
+    questions = []
+    with open("data/leetcode/visualize/questions.txt") as file:
+    	questions = json.loads(file.read())
+    return render_template('leetcode.html', questions=questions)
+
 
 def parse_demi_progress(f):
 	return json.loads(f.read())
