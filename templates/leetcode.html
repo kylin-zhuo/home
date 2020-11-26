@@ -16,16 +16,36 @@
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
 	    <p>Question <a id="questionIdInAnswer">1</a></p>
-			<div class="answerImageWrapper">
-				<img id="answerImage" src="" alt="">
+			<div class="svg-banner">
+        <svg id="svg-container">
+          <rect id="svg-border"/>
+          <!-- <g>
+            <rect x="50" y="50" rx="10" ry="10" width="50" height="50"
+             style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
+            <text x="50" y="50" transform="translate(22 28)">1</text>
+          </g>
+          <g>
+            <rect x="100" y="50" rx="10" ry="10" width="50" height="50"
+             style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
+            <text x="100" y="50" transform="translate(22 28)">2</text>
+          </g> -->
+        </svg>
 			</div>
 	  </div>
 	</div>
+
+  <script src="/static/js/leetcode-svg.js"></script>
+  <!-- <script src="/static/js/d3.js"></script> -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
 
 	<script type="text/javascript">
 
     var questions = {{questions}};
     var modal = document.getElementById("answerModal");
+
+    var Tester = {
+
+    }
 
     function createQuestionButtons() {
       var wrapper = document.querySelector(".question-wrapper");
@@ -58,9 +78,44 @@
 
     createQuestionButtons();
 
+    // Tester, show modal
+    document.querySelector(".question-wrapper").children[0].click();
+
+    SVGArray.createArrayOnSvg([1,2,3,4,5,6,7,8,9]);
+
+    // the svg functions
+    function createArray(data) {
+
+    }
+
+    function activateArrayElement(ith) {
+
+    }
+
+    function deactivateArrayElement(ith) {
+
+    }
 	</script>
 
+
+
 	<style type="text/css">
+    svg {
+      width: 100%;
+      min-height: 400px;
+    }
+
+    #svg-border {
+      /* border: 2px solid #888; */
+      width: 100%;
+      min-height: 400px;
+      fill: none;
+      stroke-width:1px;
+      stroke: rgb(13,4,55);
+      rx: 15px;
+      ry: 15px;
+      opacity: 50%;
+    }
 
 		body {
 			background-color: #ffe;
@@ -104,8 +159,9 @@
 		.modal-content {
 		  background-color: #fefefe;
 		  margin: auto;
-		  padding: 20px;
-		  border: 1px solid #888;
+		  padding: 15px;
+		  border: 2px solid #888;
+      /* border-radius: 5px; */
 		  width: 80%;
 			font-family: sans-serif;
 		}
@@ -125,20 +181,12 @@
 		  cursor: pointer;
 		}
 
-		.answerImageWrapper {
+		.svg-banner {
 			max-width: 100%;
 			max-height: 100%;
 			width: auto;
 			height: auto;
 		}
-
-		#answerImage {
-			max-width: 100%;
-			max-height: 100%;
-			width: auto;
-			height: auto;
-		}
-
 	</style>
 
 </body>
