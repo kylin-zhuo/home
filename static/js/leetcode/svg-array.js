@@ -10,6 +10,8 @@ var SVGArray = {
   height: 50,
   rx: 10,
   ry: 10,
+  activatedColor: '#f00',
+  deactivatedColor: '#aaa',
 
   init: function (data) {
     this.data = data;
@@ -17,35 +19,13 @@ var SVGArray = {
   },
 
   createArrayOnSvg: function (array) {
-/**
+    /**
     <g>
       <rect x="50" y="50" rx="10" ry="10" width="50" height="50"
        style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
       <text x="50" y="50" transform="translate(22 28)">1</text>
     </g>
-    <g>
-      <rect x="100" y="50" rx="10" ry="10" width="50" height="50"
-       style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
-      <text x="100" y="50" transform="translate(22 28)">2</text>
-    </g>
-    <g>
-      <rect x="150" y="50" rx="10" ry="10" width="50" height="50"
-       style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
-      <text x="150" y="50" transform="translate(22 28)">3</text>
-    </g>
-    <g>
-      <rect x="200" y="50" rx="10" ry="10" width="50" height="50"
-       style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
-      <text x="200" y="50" transform="translate(22 28)">4</text>
-    </g>
-    <g>
-      <rect x="250" y="50" rx="10" ry="10" width="50" height="50"
-       style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
-      <text x="250" y="50" transform="translate(22 28)">5</text>
-    </g>
     **/
-
-    // console.log("create an array on svg. Data: ", this.data, d3);
     console.log(d3.select("#svg-container"), array);
     var svg = d3.select("#svg-container");
     for (var i in array) {
@@ -58,10 +38,10 @@ var SVGArray = {
        .attr('width', this.width)
        .attr('height', this.height)
        .attr('transform', 'translate(' + this.width * i + ',0)')
-       .attr('stroke', 'black')
+       .attr('stroke', '#700')
        .attr('stroke-width', 2)
-       .attr('opacity', 0.65)
-       .attr('fill', '#456789')
+       .attr('opacity', 0.62)
+       .attr('fill', this.deactivatedColor)
        .attr('rx', this.rx)
        .attr('ry', this.ry);
 
@@ -71,7 +51,32 @@ var SVGArray = {
        .attr('transform', 'translate(' + (this.width * i + this.width * 0.4) + ',' + this.height * 0.6 + ')')
        .text(val);
     }
+    this.size = array.length;
+  },
 
+  clearArrayOnSvg: function () {
+    // d3.select("#svg-container").selectAll("*").remove();
+    // d3.select("#svg-container").append('rect').attr('id', 'svg-border');
+    clearSVG();
+  },
 
+  activateElement: function (idx) {
+    var rect = document.querySelectorAll("rect")[parseInt(idx)+1];
+    if (!!rect) {
+      rect.setAttribute('fill', this.activatedColor);
+      console.log("activate element - success -", idx);
+    } else {
+      console.log("activate element - failed -", idx);
+    }
+  },
+
+  deactivateElement: function (idx) {
+    var rect = document.querySelectorAll("rect")[parseInt(idx)+1];
+    if (!!rect) {
+      rect.setAttribute('fill', this.deactivatedColor);
+      console.log("deactivate element - success -", idx);
+    } else {
+      console.log("deactivate element - failed -", idx);
+    }
   }
 };
