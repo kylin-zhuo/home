@@ -15,7 +15,10 @@
 	<div id="answerModal" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
-	    <p>Question <a id="questionId">1</a> - <a id="questionTitle">Two Sum</a></p>
+	    <p style="font-weight: bold;">Question <a id="questionId">1</a> - <a id="questionTitle">Two Sum</a></p>
+      <p class="questionDescription">Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.</p>
       <div class="input-field" >
         <div class="" style="display: flex">
           <div class="input-unit">
@@ -79,11 +82,13 @@
 		var closeAnswerButton = document.getElementsByClassName("close")[0];
 		closeAnswerButton.onclick = function() {
 		  modal.style.display = "none";
+      clearSVG();
 		}
 
 		window.onclick = function(event) {
 		  if (event.target == modal) {
 		    modal.style.display = "none";
+        clearSVG();
 		  }
 		}
 
@@ -115,6 +120,11 @@
       rx: 15px;
       ry: 15px;
       opacity: 50%;
+    }
+
+    .questionDescription {
+      font-size: 14px;
+      line-height: 20px;
     }
 
     .input-field {
