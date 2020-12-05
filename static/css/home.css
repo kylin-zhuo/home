@@ -52,14 +52,21 @@ body {
   min-height: calc(100vh - 193px);
 }
 
-.today-keyword-head {
-  min-height: 36px;
-  padding: 0 12px;
-  font-size: 14px;
+.first-row-banner {
+  position: relative;
+  padding-bottom: 30px;
+  width: 95%;
+  min-height: 300px;
+  margin: 0 20px;
 }
 
 .today-keyword-body {
+  min-height: 36px;
+  padding: 10px 12px 0px 12px;
+}
 
+.today-keyword-history-container td {
+  width: 5%;
 }
 
 .color-empty {
@@ -75,17 +82,42 @@ body {
 }
 
 .today-keyword {
-  width: 95%;
-  height: 200px;
-  margin: 0 20px;
+
 }
 
-.today-keyword-history-container {
+.today-keyword-container {
   width: 67%;
-  height: 200px;
+  min-height: 200px;
   display: block;
   float: left;
   position: relative;
+}
+
+.today-keyword-calendar table {
+  width: 100%;
+}
+
+.today-keyword-calendar tbody tr {
+  border-top: 1px solid #dcb;
+}
+
+.today-keyword-calendar thead {
+  opacity: 70%;
+}
+
+.today-keyword-calendar .week .day {
+  opacity: 60%;
+}
+
+.today-keyword-calendar .week .today {
+  /* opacity: 60%; */
+  font-weight: bold;
+}
+
+.today-keyword-month-selector {
+  font-size: 20px;
+  margin-bottom: 10px;
+
 }
 
 .today-keyword-single-container {
@@ -120,6 +152,7 @@ body {
 }
 
 .today-keyword-single-print-word {
+  /* text-align: center; */
   margin: 12px;
 }
 
@@ -177,6 +210,30 @@ body {
   margin-left: 20px;
 }
 
+.second-row-banner {
+  margin: 20px;
+  display: block;
+  position: relative;
+}
+
 .left-panel {
-  margin: 15px 20px 10px;
+  width: 67%;
+  min-height: 400px;
+  display: block;
+  float: left;
+  position: relative;
+}
+
+.right-panel {
+
+  width: 30%;
+  height: 400px;
+  display: block;
+  float: right;
+  position: relative;
+
+}
+
+.today-keyword-body-header {
+  margin: 5px;
 }

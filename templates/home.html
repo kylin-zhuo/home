@@ -63,43 +63,33 @@
     <div class="home-content-wrapper">
 
       <!-- Today Keyword Content -->
-      <div class="today-keyword">
-        <div class="today-keyword-history-container cardboard-1">
-          <div class="today-keyword-head">
-            <div class="today-keyword-head-content"></div>
-          </div>
-          <div class="today-keyword-body">
-            <svg class="keyword-calendar">
-              <g clsss="keyword-calendar-label" transform="translate(12,0)">
-                <text x="10" y="10" class="weekday">Mon</text>
-                <text x="110" y="10" class="weekday">Tue</text>
-                <text x="210" y="10" class="weekday">Wed</text>
-                <text x="310" y="10" class="weekday">Thu</text>
-                <text x="410" y="10" class="weekday">Fri</text>
-                <text x="510" y="10" class="weekend">Sat</text>
-                <text x="610" y="10" class="weekend">Sun</text>
-              </g>
-              <g class="keyword-calendar-content" transform="translate(0,15)">
-                <g class="keyword-calendar-weekday">
-                  <rect class="color-empty" width="20" height="15" x="0" y="0">
-                    <title>text</title>
-                  </rect>
-                </g>
-                <g class="keyword-calendar-weekday">
-                </g>
-                <g class="keyword-calendar-weekday">
-                </g>
-                <g class="keyword-calendar-weekday">
-                </g>
-                <g class="keyword-calendar-weekday">
-                </g>
-                <g class="keyword-calendar-weekend">
-                </g>
-                <g class="keyword-calendar-weekend">
-                </g>
+      <div class="first-row-banner">
 
-              </g>
-            </svg>
+        <div class="today-keyword-container cardboard-1">
+          <div class="today-keyword-month-selector">
+            <a href="#"><</a> <text>MONTH</text> <text>YEAR</text> <a href="#">></a>
+          </div>
+          <div class="today-keyword-calendar">
+            <table>
+              <thead>
+                <tr>
+                  <th><b>Mon</b></th><th><b>Tue</b></th><th><b>Wed</b></th><th><b>Thu</b></th>
+                  <th><b>Fri</b></th><th><b>Sat</b></th><th><b>Sun</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="week" id="week1">
+                  <!-- template for script to create -->
+                  <!-- <td><div class="day">1</div><div class="word">Word</div></td> -->
+                  <!-- <td><div class="today">2</div><div class="today-word">Word</div></td> -->
+                </tr>
+                <tr class="week" id="week2"></tr>
+                <tr class="week" id="week3"></tr>
+                <tr class="week" id="week4"></tr>
+                <tr class="week" id="week5"></tr>
+                <tr class="week" id="week6"></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -109,22 +99,49 @@
               <p><a href="">Archimedes</a></p>
             </div>
             <div class="today-keyword-single-others">
-
             </div>
-
           </div>
         </div>
       </div>
 
-      <div class="left-panel">
-        <a href="/demidovich.html">Demidovich</a>
-        <br>
-        <a href="/leetcode.html">Leetcode</a>
+      <div class="second-row-banner">
+        <div class="left-panel">
+          <a href="/demidovich.html">Demidovich</a>
+          <br>
+          <a href="/leetcode.html">Leetcode</a>
+        </div>
+        <div class="right-panel">
+        </div>
       </div>
-
     </div>
   </div>
 
+  <script type="text/javascript">
+
+    // create the calendar content
+    function createCalendar() {
+      var dates = [];
+      var words = [];
+      var today = new Date();
+      var months = ["January","February","March","April","May","June","July",
+            "August","September","October","November","December"];
+      var mm = months[today.getMonth()]; //January is 0
+      var yyyy = today.getFullYear();
+      var dd = today.getDate();
+      var weekday = today.getDay();
+      var tbody = document.querySelector(".today-keyword-calendar tbody");
+
+      for(var i = 0; i < 6; i++) {
+        for (var j = 0; j < 7; j++) {
+          var wrapper= document.createElement('td');
+          wrapper.innerHTML= '<div class=\"day\">' + i + ' ' + j + '</div><div class=\"word\">Word</div>';
+          tbody.children[i].appendChild(wrapper);
+        }
+      }
+    }
+
+    createCalendar();
+  </script>
 
   <hr>
 
