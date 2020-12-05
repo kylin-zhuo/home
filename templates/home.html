@@ -65,9 +65,9 @@
       <!-- Today Keyword Content -->
       <div class="first-row-banner">
 
-        <div class="today-keyword-container cardboard-1">
+        <div class="today-keyword-container-left cardboard-1">
           <div class="today-keyword-month-selector">
-            <a href="#"><</a> <text>MONTH</text> <text>YEAR</text> <a href="#">></a>
+            <a href="#"></a><text>MONTH</text>  <text>YEAR</text> <a href="#"></a>
           </div>
           <div class="today-keyword-calendar">
             <table>
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="today-keyword-single-container cardboard-2">
+        <div class="today-keyword-container-right cardboard-2">
           <div class="today-keyword-single-wrapper">
             <div class="today-keyword-single-print-word">
               <p><a href="">Archimedes</a></p>
@@ -105,18 +105,20 @@
       </div>
 
       <div class="second-row-banner">
-        <div class="left-panel">
+        <div class="second-row-banner-left">
           <a href="/demidovich.html">Demidovich</a>
           <br>
           <a href="/leetcode.html">Leetcode</a>
         </div>
-        <div class="right-panel">
+        <div class="second-row-banner-right">
         </div>
       </div>
     </div>
   </div>
 
   <script type="text/javascript">
+
+    var keywordsMap = JSON.parse('{{all_keywords | tojson}}');
 
     // create the calendar content
     function createCalendar() {
@@ -125,19 +127,45 @@
       var today = new Date();
       var months = ["January","February","March","April","May","June","July",
             "August","September","October","November","December"];
-      var mm = months[today.getMonth()]; //January is 0
-      var yyyy = today.getFullYear();
+      var mm = today.getMonth();
+      var mmText = months[today.getMonth()]; //January is 0
+      var year = today.getFullYear();
       var dd = today.getDate();
       var weekday = today.getDay();
       var tbody = document.querySelector(".today-keyword-calendar tbody");
 
-      for(var i = 0; i < 6; i++) {
+      var monthbody = document.querySelector(".today-keyword-month-selector");
+      monthbody.children[1].innerText = mmText;
+      monthbody.children[2].innerText = year;
+
+      // decide which day is the 1st day of the month
+      var weekDayOf1stDay = ((weekday - (dd-1) % 7) + 7) % 7;
+
+      for (var i = 0; i < 6; i++) {
         for (var j = 0; j < 7; j++) {
           var wrapper= document.createElement('td');
-          wrapper.innerHTML= '<div class=\"day\">' + i + ' ' + j + '</div><div class=\"word\">Word</div>';
+          var ith = 7*i + j+1;
+          var _day, _word;
+          if (ith < weekDayOf1stDay || ith - weekDayOf1stDay > 30) {
+            _day = '';
+            _word = '';
+          } else {
+            _day = ith - weekDayOf1stDay + 1;
+            var key = '' + year + '-' + (mm+1) + '-' + _day;
+            _word = keywordsMap[key] || '-';
+          }
+          if (i == 5 && j == 0 && 35 - weekDayOf1stDay > 30) {
+            break;
+          }
+
+          wrapper.innerHTML= '<div class=\"day\">' + _day + '</div><div class=\"word\">' + _word + '</div>';
+          if (parseInt(_day) === dd) {
+            wrapper.innerHTML= '<div class=\"day today\">' + _day + '</div><div class=\"word today-word\">' + _word + '</div>';
+          }
           tbody.children[i].appendChild(wrapper);
         }
       }
+
     }
 
     createCalendar();

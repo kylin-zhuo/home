@@ -55,9 +55,9 @@ body {
 .first-row-banner {
   position: relative;
   padding-bottom: 30px;
-  width: 95%;
-  min-height: 300px;
-  margin: 0 20px;
+  width: 90%;
+  min-height: 284px;
+  margin: 0 5%;
 }
 
 .today-keyword-body {
@@ -65,13 +65,9 @@ body {
   padding: 10px 12px 0px 12px;
 }
 
-.today-keyword-history-container td {
-  width: 5%;
-}
-
-.color-empty {
+/* .color-empty {
   fill: #f9fff9;
-}
+} */
 
 .keyword-calendar {
   width: 100%;
@@ -85,47 +81,58 @@ body {
 
 }
 
-.today-keyword-container {
+.today-keyword-container-left {
   width: 67%;
-  min-height: 200px;
+  min-height: 284px;
   display: block;
   float: left;
   position: relative;
 }
 
+.today-keyword-container-right {
+  width: 30%;
+  min-height: 284px;
+  display: block;
+  float: right;
+  position: relative;
+}
+
 .today-keyword-calendar table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .today-keyword-calendar tbody tr {
-  border-top: 1px solid #dcb;
+  border-top: 1px dotted #dde;
 }
 
 .today-keyword-calendar thead {
   opacity: 70%;
+  border-bottom: 2px solid #cdd;
 }
 
 .today-keyword-calendar .week .day {
   opacity: 60%;
 }
 
-.today-keyword-calendar .week .today {
+.today-keyword-calendar .week .today,  {
   /* opacity: 60%; */
   font-weight: bold;
 }
 
-.today-keyword-month-selector {
-  font-size: 20px;
-  margin-bottom: 10px;
-
+.today-keyword-calendar .week .today-word {
+  font-weight: bold;
 }
 
-.today-keyword-single-container {
-  width: 30%;
-  height: 200px;
-  display: block;
-  float: right;
-  position: relative;
+.today-keyword-calendar .week .word:hover {
+  color: #11f;
+  cursor: pointer;
+}
+
+.today-keyword-month-selector {
+  font-size: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .cardboard-1 {
@@ -133,11 +140,11 @@ body {
   box-sizing: border-box;
   /* margin: 10px; */
   padding: 0;
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(7, 12, 2, 0.95);
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.5;
-  background: #f9fff9;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px;
   text-align: center;
@@ -145,7 +152,7 @@ body {
 
 .cardboard-2 {
   box-sizing: border-box;
-  background: #f9fff3;
+  background: #8FFBFF;
   border-radius: 8px;
   color: rgba(0, 0, 0, 0.65);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px;
@@ -216,24 +223,16 @@ body {
   position: relative;
 }
 
-.left-panel {
+.second-row-banner-left {
   width: 67%;
-  min-height: 400px;
   display: block;
   float: left;
   position: relative;
 }
 
-.right-panel {
-
+.second-row-banner-right {
   width: 30%;
-  height: 400px;
   display: block;
   float: right;
   position: relative;
-
-}
-
-.today-keyword-body-header {
-  margin: 5px;
 }
