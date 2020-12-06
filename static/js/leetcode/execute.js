@@ -3,7 +3,7 @@ function execute(qid) {
   console.log("EXECUTE:", qid); // TODO: add each execution function for all the problems
   var array = JSON.parse(document.querySelector("#input1").value);
   var target = JSON.parse(document.querySelector("#input2").value);
-  var set = new Set();
+  var map = {};
   SVGArray.clearArrayOnSvg();
   SVGArray.createArrayOnSvg(array);
 
@@ -18,48 +18,52 @@ function execute(qid) {
    .attr('x', 50)
    .attr('y', 230)
    .attr('id', 'hashset')
-   .text(printSet(set));
+   .text(printMap(map));
   svg.append('text')
   .attr('x', 50)
   .attr('y', 260)
   .attr('id', 'result')
-  .text("Result: " + 'false');
+  .text("Result: " + '[-1, -1]');
 
-  // algorithm
+  // loop
   $(function(){
-    loopArray(array, target, set, 0);
+    loopArray(array, target, map, 0);
   });
-
 }
 
-var loopArray = function(arr, target, set, i) {
-    iterateStep(arr, target, set, i, function(){
+var loopArray = function(arr, target, map, i) {
+    iterateStep(arr, target, map, i, function(){
         i++;
         if(i < arr.length) {
-            loopArray(arr, target, set, i);
+            loopArray(arr, target, map, i);
         }
     });
 }
 
-function iterateStep(array, target, set, i, callback) {
+function iterateStep(array, target, map, i, callback) {
   setTimeout(function() {
     SVGArray.activateElement(i);
     SVGArray.deactivateElement(i-1);
-    if (set.has(target-array[i])) {
-      document.querySelector("#result").innerHTML = "Result: true";
+    if (map.hasOwnProperty(target-array[i])) {
+      document.querySelector("#result").innerHTML = 'Result: [' + map[target-array[i]] + ', ' + i + ']';
       return;
     } else {
-      set.add(array[i]);
-      document.querySelector("#hashset").innerHTML = printSet(set);
+      map[array[i]] = i;
+      document.querySelector("#hashset").innerHTML = printMap(map);
     }
     callback();
   }, 1000);
 }
 
-function printSet(set) {
-  var val = 'HashSet: [';
-  for (item of set.values())
-    val += (item + ',');
-  val = val.substring(0, val.length-1) + ']';
-  return val;
+function printMap(map) {
+  if (!map || Object.keys(map).length == 0) {
+    return 'Map: {}';
+  }
+  var string = 'Map: {';
+  var key;
+  for (key in map) {
+    string += key + ':' + map[key] + ', ';
+  }
+  string = string.substring(0, string.length-2) + '}';
+  return string;
 }
