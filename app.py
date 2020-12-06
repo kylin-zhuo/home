@@ -26,17 +26,21 @@ def close_connection(exception):
 @app.route('/')
 def home():
     cur = get_db().execute("select * from keywords")
+    data = cur.fetchall()
     all_keywords = dict(cur.fetchall())
     cur.close()
-    return render_template('home.html', all_keywords=all_keywords)
+    keywords_dict = dict([(d[0], (d[1], d[2])) for d in data])
+    return render_template('home.html', keywords_dict=keywords_dict)
 
 
 @app.route('/home.html')
 def index():
     cur = get_db().execute("select * from keywords")
+    data = cur.fetchall()
     all_keywords = dict(cur.fetchall())
     cur.close()
-    return render_template('home.html', all_keywords=all_keywords)
+    keywords_dict = dict([(d[0], (d[1], d[2])) for d in data])
+    return render_template('home.html', keywords_dict=keywords_dict)
 
 
 @app.route('/about.html')

@@ -56,7 +56,7 @@ body {
   position: relative;
   padding-bottom: 30px;
   width: 90%;
-  min-height: 284px;
+  min-height: 240px;
   margin: 0 5%;
 }
 
@@ -83,7 +83,7 @@ body {
 
 .today-keyword-container-left {
   width: 67%;
-  min-height: 284px;
+  min-height: 264px;
   display: block;
   float: left;
   position: relative;
@@ -91,7 +91,8 @@ body {
 
 .today-keyword-container-right {
   width: 30%;
-  min-height: 284px;
+  min-height: 264px;
+  height: auto;
   display: block;
   float: right;
   position: relative;
@@ -107,7 +108,7 @@ body {
 }
 
 .today-keyword-calendar thead {
-  opacity: 70%;
+  opacity: 60%;
   border-bottom: 2px solid #cdd;
 }
 
@@ -129,10 +130,33 @@ body {
   cursor: pointer;
 }
 
+.today-keyword-calendar .week .tooltiptext {
+  visibility: hidden;
+  /* width: 90%; */
+  background-color: #eee;
+  color: blue;
+  text-align: center;
+  border-radius: 4px;
+  padding: 1px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  /* margin-left: -60px; */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.today-keyword-calendar .week .word:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
 .today-keyword-month-selector {
   font-size: 20px;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #345;
 }
 
 .cardboard-1 {
@@ -152,20 +176,21 @@ body {
 
 .cardboard-2 {
   box-sizing: border-box;
-  background: #8FFBFF;
+  background: #fff;
   border-radius: 8px;
   color: rgba(0, 0, 0, 0.65);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px;
 }
 
 .today-keyword-single-print-word {
-  /* text-align: center; */
-  margin: 12px;
+  text-align: center;
+  /* margin: 12px; */
+
 }
 
 .today-keyword-single-print-word a {
   text-decoration: none;
-  color: #444;
+  color: #777;
   font-size: 56px;
 }
 

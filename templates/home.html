@@ -44,14 +44,14 @@
             </a>
           </div>
           <div class="nav-item-container__16kF">
-            <a href="#" class="nav-item__5BvG">
-              Blog
+            <a href="/demidovich.html" class="nav-item__5BvG">
+              Demodovich
             </a>
           </div>
           <div class="nav-item-container__16kF">
             <span class="nav-item__5BvG">
-              <a class="nav-item__5BvG" href="#">
-                About
+              <a class="nav-item__5BvG" href="/leetcode.html">
+                Leetcode
               </a>
             </span>
           </div>
@@ -96,7 +96,7 @@
         <div class="today-keyword-container-right cardboard-2">
           <div class="today-keyword-single-wrapper">
             <div class="today-keyword-single-print-word">
-              <p><a href="">Archimedes</a></p>
+              <p><a href="" id="today-keyword-cardboard">Archimedes</a></p>
             </div>
             <div class="today-keyword-single-others">
             </div>
@@ -106,9 +106,6 @@
 
       <div class="second-row-banner">
         <div class="second-row-banner-left">
-          <a href="/demidovich.html">Demidovich</a>
-          <br>
-          <a href="/leetcode.html">Leetcode</a>
         </div>
         <div class="second-row-banner-right">
         </div>
@@ -118,7 +115,7 @@
 
   <script type="text/javascript">
 
-    var keywordsMap = JSON.parse('{{all_keywords | tojson}}');
+    var keywordsMap = JSON.parse('{{keywords_dict | tojson}}');
 
     // create the calendar content
     function createCalendar() {
@@ -152,20 +149,28 @@
           } else {
             _day = ith - weekDayOf1stDay + 1;
             var key = '' + year + '-' + (mm+1) + '-' + _day;
-            _word = keywordsMap[key] || '-';
+            var map = keywordsMap[key];
+            _word = !!keywordsMap[key] ? (keywordsMap[key][0] || '-') : '-';
           }
           if (i == 5 && j == 0 && 35 - weekDayOf1stDay > 30) {
             break;
           }
-
-          wrapper.innerHTML= '<div class=\"day\">' + _day + '</div><div class=\"word\">' + _word + '</div>';
+          var tooltip = !!keywordsMap[key] ? (keywordsMap[key][1] || '') : '';
+          // var tooltip = '';
           if (parseInt(_day) === dd) {
-            wrapper.innerHTML= '<div class=\"day today\">' + _day + '</div><div class=\"word today-word\">' + _word + '</div>';
+            wrapper.innerHTML= '<div class=\"day today\">' + _day
+                                + '</div><div class=\"word today-word\">' + _word
+                                + '<span class="tooltiptext">' + tooltip + '</span></div>';
+            // show the today's word on the cardboard on the right
+            document.querySelector('#today-keyword-cardboard').innerHTML = _word;
+          } else {
+            wrapper.innerHTML= '<div class=\"day\">' + _day
+                                + '</div><div class=\"word\">' + _word
+                                + '<span class="tooltiptext">' + tooltip + '</span></div>';
           }
           tbody.children[i].appendChild(wrapper);
         }
       }
-
     }
 
     createCalendar();
