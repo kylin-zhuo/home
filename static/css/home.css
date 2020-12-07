@@ -13,7 +13,7 @@ body {
 .navbar {
   background-color: #f5f5f5;
   width: 100%;
-  height: 44px;
+  height: 52px;
   border-bottom: 1px solid #eeeeee;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -24,7 +24,7 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 15px;
 
   font-variant: tabular-nums;
   line-height: 1.5;
@@ -52,18 +52,12 @@ body {
   min-height: calc(100vh - 193px);
 }
 
-.today-keyword-head {
-  min-height: 36px;
-  padding: 0 12px;
-  font-size: 14px;
-}
-
-.today-keyword-body {
-
-}
-
-.color-empty {
-  fill: #f9fff9;
+.first-row-banner {
+  position: relative;
+  padding-bottom: 30px;
+  width: 90%;
+  min-height: 320px;
+  margin: 0 5%;
 }
 
 .keyword-calendar {
@@ -74,26 +68,85 @@ body {
   width: 100%;
 }
 
-.today-keyword {
-  width: 95%;
-  height: 200px;
-  margin: 0 20px;
-}
-
-.today-keyword-history-container {
+.today-keyword-container-left {
   width: 67%;
-  height: 200px;
+  min-height: 264px;
   display: block;
   float: left;
   position: relative;
+  border: 1px solid #ccc;
+  border-radius: 24px;
 }
 
-.today-keyword-single-container {
+.today-keyword-container-right {
   width: 30%;
-  height: 200px;
+  min-height: 264px;
+  height: auto;
   display: block;
   float: right;
   position: relative;
+  border-radius: 24px;
+}
+
+.today-keyword-calendar table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.today-keyword-calendar tbody tr {
+  border-top: 1px dotted #eee;
+}
+
+.today-keyword-calendar thead {
+  opacity: 60%;
+  border-bottom: 2px solid #99d;
+}
+
+.today-keyword-calendar .week .day {
+  opacity: 60%;
+}
+
+.today-keyword-calendar .week .today,  {
+  /* opacity: 60%; */
+  font-weight: bold;
+}
+
+.today-keyword-calendar .week .today-word {
+  font-weight: bold;
+}
+
+.today-keyword-calendar .week .word:hover {
+  color: #11f;
+  cursor: pointer;
+}
+
+.today-keyword-calendar .week .tooltiptext {
+  visibility: hidden;
+  /* width: 90%; */
+  background-color: #eee;
+  color: blue;
+  text-align: center;
+  border-radius: 4px;
+  padding: 1px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  /* margin-left: -60px; */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.today-keyword-calendar .week .word:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.today-keyword-month-selector {
+  font-size: 20px;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #345;
 }
 
 .cardboard-1 {
@@ -101,31 +154,32 @@ body {
   box-sizing: border-box;
   /* margin: 10px; */
   padding: 0;
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(7, 12, 2, 0.95);
   font-size: 14px;
   font-variant: tabular-nums;
-  line-height: 1.5;
-  background: #f9fff9;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px;
+  line-height: 1.6;
+  background: #ffffff;
+  /* border-radius: 30px; */
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px;
   text-align: center;
 }
 
 .cardboard-2 {
   box-sizing: border-box;
-  background: #f9fff3;
-  border-radius: 8px;
+  /* background: #fff; */
   color: rgba(0, 0, 0, 0.65);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px;
 }
 
 .today-keyword-single-print-word {
-  margin: 12px;
+  text-align: center;
+  /* margin: 12px; */
+
 }
 
 .today-keyword-single-print-word a {
   text-decoration: none;
-  color: #444;
+  color: #777;
   font-size: 56px;
 }
 
@@ -135,7 +189,7 @@ body {
 }
 
 .home-logo {
-  height: 25px;
+  height: 36px;
   margin-bottom: 0px;
 }
 .nav-item-container__16kF .nav-item__5BvG {
@@ -177,6 +231,31 @@ body {
   margin-left: 20px;
 }
 
-.left-panel {
-  margin: 15px 20px 10px;
+.second-row-banner {
+  margin: 20px;
+  display: block;
+  position: relative;
+}
+
+.second-row-banner-left {
+  width: 67%;
+  display: block;
+  float: left;
+  position: relative;
+}
+
+.second-row-banner-right {
+  width: 30%;
+  display: block;
+  float: right;
+  position: relative;
+}
+
+#prev-month, #next-month {
+  opacity: 66%;
+}
+
+#prev-month:hover, #next-month:hover {
+  cursor: pointer;
+  opacity: 95%;
 }

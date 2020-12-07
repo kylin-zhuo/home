@@ -6,7 +6,7 @@
 <body>
 
 	<div class="title">
-		<p>Leetcode Solution Visualization</p>
+		<span>Leetcode Solution Visualization</span> <span class='right'><a href="/home.html">Back</a></span>
 	</div>
 
 	<div class="question-wrapper"></div>
@@ -149,12 +149,20 @@ You can return the answer in any order.</p>
 
 		.title {
 		  position: relative;
+			text-align: center;
+			margin: 20px;
 		}
 
-		.title p {
-			text-align: center;
+		.title span {
+			/* position: absolute; */
 			font-family: sans-serif;
 			font-weight: bold;
+			color: #435678;
+		}
+
+		.title .right {
+			position: relative;
+			float: right;
 		}
 
     .question-wrapper {

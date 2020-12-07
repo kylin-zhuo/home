@@ -25,12 +25,22 @@ def close_connection(exception):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    cur = get_db().execute("select * from keywords")
+    data = cur.fetchall()
+    all_keywords = dict(cur.fetchall())
+    cur.close()
+    keywords_dict = dict([(d[0], (d[1], d[2])) for d in data])
+    return render_template('home.html', keywords_dict=keywords_dict)
 
 
 @app.route('/home.html')
 def index():
-    return render_template('home.html')
+    cur = get_db().execute("select * from keywords")
+    data = cur.fetchall()
+    all_keywords = dict(cur.fetchall())
+    cur.close()
+    keywords_dict = dict([(d[0], (d[1], d[2])) for d in data])
+    return render_template('home.html', keywords_dict=keywords_dict)
 
 
 @app.route('/about.html')
@@ -38,14 +48,13 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/blog.html')
+@app.route('/wanderlust.html')
 def blog():
 	# fetch the descriptions of all the posts
     cur = get_db().execute("select * from post order by date")
     post_list = cur.fetchall()
     cur.close()
-    # print(post_list)
-    return render_template('blog.html', post_list=post_list, len=len(post_list))
+    return render_template('wanderlust.html', post_list=post_list, len=len(post_list))
 
 
 @app.route('/contact.html')
