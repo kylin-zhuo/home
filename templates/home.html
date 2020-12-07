@@ -39,7 +39,7 @@
             </a>
           </div>
           <div class="nav-item-container__16kF">
-            <a href="/blog.html" class="nav-item__5BvG">
+            <a href="/wanderlust.html" class="nav-item__5BvG">
               WanderLust
             </a>
           </div>
@@ -233,8 +233,9 @@
       createMonthCalendar(currentYear, currentMonth);
     });
 
-
-
+    var heightLeftContainer = document.querySelector('.today-keyword-container-left').offsetHeight;
+    document.querySelector('.today-keyword-container-right')
+            .setAttribute("style", "height:" + heightLeftContainer + "px");
 
   </script>
 

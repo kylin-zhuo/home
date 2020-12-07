@@ -48,13 +48,13 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/blog.html')
+@app.route('/wanderlust.html')
 def blog():
 	# fetch the descriptions of all the posts
     cur = get_db().execute("select * from post order by date")
     post_list = cur.fetchall()
     cur.close()
-    return render_template('blog.html', post_list=post_list, len=len(post_list))
+    return render_template('wanderlust.html', post_list=post_list, len=len(post_list))
 
 
 @app.route('/contact.html')
