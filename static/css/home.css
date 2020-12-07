@@ -104,12 +104,12 @@ body {
 }
 
 .today-keyword-calendar tbody tr {
-  border-top: 1px dotted #dde;
+  border-top: 1px dotted #eee;
 }
 
 .today-keyword-calendar thead {
   opacity: 60%;
-  border-bottom: 2px solid #cdd;
+  border-bottom: 2px solid #99d;
 }
 
 .today-keyword-calendar .week .day {
@@ -154,7 +154,7 @@ body {
 
 .today-keyword-month-selector {
   font-size: 20px;
-  margin-bottom: 5px;
+  margin: 10px 0;
   font-weight: bold;
   color: #345;
 }
@@ -260,4 +260,13 @@ body {
   display: block;
   float: right;
   position: relative;
+}
+
+#prev-month, #next-month {
+  opacity: 66%;
+}
+
+#prev-month:hover, #next-month:hover {
+  cursor: pointer;
+  opacity: 95%;
 }
