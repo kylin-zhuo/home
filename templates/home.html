@@ -198,7 +198,9 @@
     }
 
     function getWeekDayOf1stDay(year, month) {
-      return new Date(year + '-' + month + '-1 00:00:00').getDay() || 7;
+      // return new Date(year + '-' + month + '-1 00:00:00').getDay() || 7;
+      return new Date(year, month-1, 1).getDay() || 7;
+
     }
 
     function getNumberOfDaysInMonth(year, month) {
