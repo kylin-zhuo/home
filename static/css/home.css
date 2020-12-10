@@ -188,6 +188,12 @@ body {
   height: 50%;
   border: 1px solid #eee;
   border-radius: 8px;
+  padding-top: 5px;
+}
+
+.box-row-1 .box-row-1-left span {
+  font-size: 20px;
+  font-family:cursive;
 }
 
 .box-row-1 .box-row-1-left .lower {
@@ -211,13 +217,7 @@ body {
   text-decoration: none;
   color: #777;
   font-size: 32px;
-  /* margin: 0; */
-  /* display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0; */
+  font-family: cursive;
 }
 
 .box-row-1 .box-row-1-right a:hover {
@@ -257,6 +257,26 @@ body {
   float: left;
   border: 1px solid #eee;
   border-radius: 8px;
+}
+
+.box-row-3 .col2 .upper {
+  height: 50%;
+  width: 100%;
+  position: relative;
+}
+
+.box-row-3 .col2 .lower {
+  height: 50%;
+  width: 100%;
+  position: relative;
+}
+
+.box-row-3 .col2 .coin-holder {
+  /* width: 80%; /* Can be in percentage also. */ */
+  height: 50%;
+  margin: 0 auto;
+  display: block;
+  position: relative;
 }
 
 .box-row-3 .col3 {
