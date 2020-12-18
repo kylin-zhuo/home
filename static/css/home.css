@@ -146,10 +146,12 @@ body {
 }
 
 .today-keyword-month-selector {
-  font-size: 20px;
-  margin: 10px 0;
+  font-size: 18px;
+  margin: 10px 30px;
   font-weight: bold;
-  color: #345;
+  color: #769;
+  position: relative;
+  float: right;
 }
 
 .cardboard-1 {

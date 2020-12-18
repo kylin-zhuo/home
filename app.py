@@ -30,6 +30,13 @@ def home():
     all_keywords = dict(cur.fetchall())
     cur.close()
     keywords_dict = dict([(d[0], (d[1], d[2])) for d in data])
+
+
+    cur = get_db().execute("select * from checkins")
+    print(cur.fetchone())
+    cur.close()
+
+
     return render_template('home.html', keywords_dict=keywords_dict)
 
 
