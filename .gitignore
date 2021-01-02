@@ -16,5 +16,3 @@ instance/
 htmlcov/
 
 /static/js/d3.js
-
-.md
