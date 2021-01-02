@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  color: #f5f5e5;
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-variant: tabular-nums;
@@ -32,6 +31,7 @@ body {
 }
 
 .navbar_container {
+  max-width: 1280px;
   width: 100%;
   position: relative;
   display: -webkit-box;
@@ -39,7 +39,7 @@ body {
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
+  /* align-items: center; */
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -50,6 +50,15 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   min-height: calc(100vh - 193px);
+  max-width: 1280px;
+  width: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: auto;
 }
 
 .first-row-banner {
@@ -75,7 +84,7 @@ body {
   float: left;
   position: relative;
   border: 1px solid #ccc;
-  border-radius: 24px;
+  border-radius: 4 px;
 }
 
 .today-keyword-container-right {
@@ -85,10 +94,12 @@ body {
   display: block;
   float: right;
   position: relative;
-  border-radius: 24px;
+  border: 1px solid #ccc;
+  border-radius: 4 px;
+  /* border-radius: 24px;
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.65);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px, rgba(0, 0, 0, 0.06) 0px 2px 8px; */
 }
 
 .today-keyword-calendar table {
