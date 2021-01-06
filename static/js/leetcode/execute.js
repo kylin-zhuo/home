@@ -1,6 +1,60 @@
 
+
 function execute(qid) {
-  console.log("EXECUTE:", qid); // TODO: add each execution function for all the problems
+  if (qid === 1) twoSum();
+  else if (qid === 448) findDisappearedNumbers();
+}
+
+function findDisappearedNumbers() {
+  var array = JSON.parse(document.querySelector("#input1").value);
+  SVGArray.clearArrayOnSvg();
+  SVGArray.createArrayOnSvg(array);
+
+  // create the field for Parameters
+  var svg = d3.select("#svg-container");
+  svg.append('text')
+     .attr('x', 50)
+     .attr('y', 200)
+     .attr('id', 'currentElement')
+     .text('Current Element:');
+  svg.append('text')
+     .attr('x', 50)
+     .attr('y', 230)
+     .attr('id', 'index')
+     .text('Go to index:');
+  svg.append('text')
+     .attr('x', 50)
+     .attr('y', 260)
+     .attr('id', '')
+     .text('And make the element negative');
+  svg.append('text')
+     .attr('x', 50)
+     .attr('y', 290)
+     .attr('id', 'result')
+     .text('Result:');
+
+  $(function(){
+    loopArray448(array, 0);
+    document.addEventListener('loopComplete', function() {
+      SVGArray.deactivateElement(array.length - 1);
+      console.log('array:', array);
+      var result = [];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] > 0) {
+          result.push(i+1);
+          SVGArray.activateElement(i);
+        }
+      }
+      console.log('result:', result);
+      document.querySelector('#result').innerHTML = 'Result: [' + result + ']';
+
+    });
+  });
+
+}
+
+
+function twoSum(qid) {
   var array = JSON.parse(document.querySelector("#input1").value);
   var target = JSON.parse(document.querySelector("#input2").value);
   var map = {};
@@ -27,20 +81,53 @@ function execute(qid) {
 
   // loop
   $(function(){
-    loopArray(array, target, map, 0);
+    loopArray1(array, target, map, 0);
   });
 }
 
-var loopArray = function(arr, target, map, i) {
-    iterateStep(arr, target, map, i, function(){
+var loopArray448 = function(arr, i) {
+  interateStep448(arr, i, function(){
+    i++;
+    if (i < arr.length) {
+      loopArray448(arr, i);
+    } else {
+      var event = document.createEvent("Event");
+      event.initEvent("loopComplete", true, true);
+      document.dispatchEvent(event);
+    }
+  });
+}
+
+function interateStep448(array, i, callback) {
+  setTimeout(function() {
+    SVGArray.activateElement(i);
+    SVGArray.deactivateElement(i-1);
+    var val = array[i];
+    var index = Math.abs(val) - 1;
+    if (array[index] > 0) {
+      array[index] = - array[index];
+      SVGArray.changeValueOfElement(index, array[index]);
+    }
+    document.querySelector('#currentElement').innerHTML = "Current Element: " + val;
+    document.querySelector('#index').innerHTML = "Go to index: " + index;
+    // if (i == array.length - 1) {
+    //
+    // }
+    callback();
+  }, 1000);
+
+}
+
+var loopArray1 = function(arr, target, map, i) {
+    iterateStep1(arr, target, map, i, function(){
         i++;
         if(i < arr.length) {
-            loopArray(arr, target, map, i);
+            loopArray1(arr, target, map, i);
         }
     });
 }
 
-function iterateStep(array, target, map, i, callback) {
+function iterateStep1(array, target, map, i, callback) {
   setTimeout(function() {
     SVGArray.activateElement(i);
     SVGArray.deactivateElement(i-1);

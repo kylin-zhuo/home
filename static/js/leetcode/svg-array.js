@@ -1,7 +1,6 @@
 var SVGArray = {
 
   svg: document.querySelector("#svg-container"),
-  // svg: d3.select("#svg-container"),
   x0: 50, // pivot point x
   y0: 50, // pivot point y
   data: [],
@@ -19,13 +18,7 @@ var SVGArray = {
   },
 
   createArrayOnSvg: function (array) {
-    /**
-    <g>
-      <rect x="50" y="50" rx="10" ry="10" width="50" height="50"
-       style="fill:#456789;stroke:black;stroke-width:2;opacity:0.65" />
-      <text x="50" y="50" transform="translate(22 28)">1</text>
-    </g>
-    **/
+
     console.log(d3.select("#svg-container"), array);
     var svg = d3.select("#svg-container");
     for (var i in array) {
@@ -50,6 +43,14 @@ var SVGArray = {
        .attr('y', this.y0)
        .attr('transform', 'translate(' + (this.width * i + this.width * 0.4) + ',' + this.height * 0.6 + ')')
        .text(val);
+
+      g.append('text')
+       .attr('x', this.x0)
+       .attr('y', this.y0)
+       .attr('transform', 'translate(' + (this.width * i + this.width * 0.4) + ',' + this.height * 1.35 + ')')
+       .text(i)
+       .attr('style', 'opacity: 0.5; font-size:10px;');
+
     }
     this.size = array.length;
   },
@@ -77,6 +78,13 @@ var SVGArray = {
       console.log("deactivate element - success -", idx);
     } else {
       console.log("deactivate element - failed -", idx);
+    }
+  },
+
+  changeValueOfElement: function (idx, newValue) {
+    var rect = document.querySelectorAll("rect")[parseInt(idx)+1];
+    if (!!rect && !!rect.nextElementSibling) {
+      rect.nextElementSibling.innerHTML = newValue;
     }
   }
 };
