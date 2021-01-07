@@ -50,9 +50,7 @@ function findDisappearedNumbers() {
 
     });
   });
-
 }
-
 
 function twoSum(qid) {
   var array = JSON.parse(document.querySelector("#input1").value);

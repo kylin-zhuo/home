@@ -4,6 +4,8 @@ function configureInputFields(qid) {
   console.debug('configureInputFields -', qid);
   if (qid === '1') {
     displayInputUnits([1,2]);
+    setDefaultInputValue(1, '[1,3,4,5,7]');
+    setDefaultInputValue(2, '10');
   }
   if (qid === '448') {
     // only display input unit 1

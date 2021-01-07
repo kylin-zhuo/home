@@ -7,10 +7,12 @@ var SVGArray = {
   size: 0,
   width: 50,
   height: 50,
-  rx: 10,
-  ry: 10,
-  activatedColor: '#f00',
-  deactivatedColor: '#aaa',
+  rx: 0,
+  ry: 0,
+  activatedColor: 'red',
+  deactivatedColor: '#fff',
+  strokeColor: 'black',
+  opacity: 0.99,
 
   init: function (data) {
     this.data = data;
@@ -31,9 +33,9 @@ var SVGArray = {
        .attr('width', this.width)
        .attr('height', this.height)
        .attr('transform', 'translate(' + this.width * i + ',0)')
-       .attr('stroke', '#700')
+       .attr('stroke', this.strokeColor)
        .attr('stroke-width', 2)
-       .attr('opacity', 0.62)
+       .attr('opacity', this.opacity)
        .attr('fill', this.deactivatedColor)
        .attr('rx', this.rx)
        .attr('ry', this.ry);
