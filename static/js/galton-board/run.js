@@ -44,7 +44,7 @@ demo.run = function() {
   Runner.run(runner, engine);
 
   // add bodies
-  let total = 1500;
+  let total = 800;
 
   const pegs = [];
   const spacingY = 20;
