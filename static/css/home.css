@@ -178,10 +178,8 @@ body {
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.6;
-  background: #444;
-  /* border-radius: 30px; */
-  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px; */
   text-align: center;
+  background: #222;
 }
 
 /* Box rows*/
@@ -368,3 +366,12 @@ body {
   cursor: pointer;
   opacity: 95%;
 }
+
+#galton-board {
+  margin: auto;
+  border: 1px #444 solid;
+  background: #222;
+  width: 266px;
+  height: 420px;
+}
+
