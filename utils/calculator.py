@@ -28,6 +28,7 @@ class Calculator:
         return j-1
 
     def calculate(self, string):
+        string = string.replace(' ', '')
         if not string:
             return 0
         n = len(string)
@@ -64,21 +65,21 @@ class Calculator:
                 else:
                     self.error()
                     return "invalid"
-
             elif sign == '/':
                 if stack:
-                    div = stack.pop() // num
-                    stack.append(div)
+                    dd = stack.pop()
+                    div = abs(dd) // num
+                    stack.append(div * (1 if dd > 0 else -1))
                 else:
                     self.error()
                     return "invalid"
-        # print(stack)
+
         return sum(stack)
 
 
 if __name__ == '__main__':
     calculator = Calculator()
     test_input_1 = "(77+3)/(16-12)+2*101"
-    test_input_2 = "21*(1+2)+3+4"
+    test_input_2 = "21* (( 1 +2)*3)+4/2"
     res = calculator.calculate(test_input_2)
     print(test_input_2, "=", res)
